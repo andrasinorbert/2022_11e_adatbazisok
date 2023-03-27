@@ -78,7 +78,7 @@
     conn.close()
     ```
 
-## Insert Into eltérések
+### Insert Into eltérések
 
 ```py
 sql = f"INSERT INTO {táblanév}({oszlopnevek}) VALUES ({értékek});"
