@@ -49,11 +49,91 @@ def insertDB( nev, kor):
     cursor.execute(sql)
     con.commit()
     con.close()
+    
+def updateKor(ujkor, felt=0):
+    con = connDB(
+            defaults["DB_HOST"],
+            defaults["DB_PORT"],
+            defaults["DB_USER"],
+            defaults["DB_PASSWD"],
+            defaults["DB_NAME"])
+    cursor = con.cursor()
 
-rows = selectDB("név")
+    sql= f"UPDATE {defaults['DB_TABLE']} "
+    sql+= f"SET Kor = {ujkor} WHERE {felt};"
+    cursor.execute(sql)
+    con.commit()
+    con.close()
 
-insertDB("Laura", 9)
-for row in rows:
-    print(row)
+def deleteRows(felt="0"):
+    con = connDB(
+            defaults["DB_HOST"],
+            defaults["DB_PORT"],
+            defaults["DB_USER"],
+            defaults["DB_PASSWD"],
+            defaults["DB_NAME"])
+    cursor = con.cursor()
 
+    sql= f"DELETE FROM {defaults['DB_TABLE']} "
+    sql+= f"WHERE {felt};"
+    cursor.execute(sql)
+    con.commit()
+    con.close()
+    
+def truncate(tablename):
+    con = connDB(
+            defaults["DB_HOST"],
+            defaults["DB_PORT"],
+            defaults["DB_USER"],
+            defaults["DB_PASSWD"],
+            defaults["DB_NAME"])
+    cursor = con.cursor()
 
+    sql= f"TRUNCATE {tablename};"
+    cursor.execute(sql)
+    con.commit()
+    con.close()
+
+def droptable(tablename):
+    con = connDB(
+            defaults["DB_HOST"],
+            defaults["DB_PORT"],
+            defaults["DB_USER"],
+            defaults["DB_PASSWD"],
+            defaults["DB_NAME"])
+    cursor = con.cursor()
+
+    sql= f"DROP TABLE {tablename};"
+    cursor.execute(sql)
+    con.commit()
+    con.close()
+    
+def createTable(tablename):
+    con = connDB(
+            defaults["DB_HOST"],
+            defaults["DB_PORT"],
+            defaults["DB_USER"],
+            defaults["DB_PASSWD"],
+            defaults["DB_NAME"])
+    cursor = con.cursor()
+    sql=f"CREATE TABLE {tablename}("
+    sql+= "`id` INT NOT NULL AUTO_INCREMENT ,"
+    sql+= "`név` VARCHAR(50) NOT NULL ,"
+    sql+= "`kor` INT NOT NULL ,"
+    sql+= "`magasság` INT NOT NULL ,"
+    sql+= "PRIMARY KEY (`id`)"
+    sql+= ") ENGINE = InnoDB;"
+    cursor.execute(sql)
+    con.commit()
+    con.close()
+createTable("adatok")    
+#updateKor(6, "Kor=9")
+#deleteRows("Kor=6")
+#truncate(defaults["DB_TABLE"])
+#rows = selectDB("*")
+
+#insertDB("Laura", 9)
+#for row in rows:
+#    print(row)
+
+#droptable(defaults["DB_TABLE"])
