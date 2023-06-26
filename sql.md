@@ -46,7 +46,7 @@ CREATE TABLE tablename(
     oszlopnev1 tipus megszoritasok,
     oszlopnev2 tipus megszoritasok,
     oszlopnev3 tipus megszoritasok,
-}
+)
 
 --drop
 DROP TABLE tablename;
@@ -304,7 +304,7 @@ from adatok;
 select min(kor)
 from adatok;
 
--- összegzés
+-- maximum
 select max(kor)
 from adatok;
 ```
@@ -321,7 +321,7 @@ Hajoosztályok tábla:
 ```sql
 select osztály,
 CASE
-    WHEN típus ="bb" THEN "csatahalyó"
+    WHEN típus ="bb" THEN "csatahajó"
     WHEN típus ="bc" THEN "cirkáló"
     ELSE "egyéb"
 END AS tipus
@@ -331,8 +331,8 @@ FROM Hajoosztályok;
 Eredmény:
 | osztály | tipus |
 | --- | --- |
-| Bismark | csatahalyó |
-| Iowa | csatahalyó |
+| Bismark | csatahajó |
+| Iowa | csatahajó |
 | Kongo | cirkáló |
 
 #### TOP NUMBER
